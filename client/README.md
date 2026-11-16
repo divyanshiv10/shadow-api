@@ -6,15 +6,17 @@
 
 ## Why ShadowAPI?
 
-Traditional API clients (like Postman) rely on manual request crafting and shallow `status === 200` checks, allowing silent schema drift and unhandled edge cases to reach production. Meanwhile, standalone LLM chats can suggest test ideas but cannot execute live requests or deterministically validate response contracts.
+Testing APIs manually is slow, and relying only on AI chat has limits:
+* **Manual testing misses edge cases:** In tools like Postman, developers usually test only the "happy path" (`200 OK`) and skip negative or boundary inputs because writing them by hand takes hours.
+* **Silent bugs break frontends:** An API might return `200 OK` even when a field is missing or its data type changed (e.g., a number turned into a string).
+* **AI chats don't execute live tests:** LLMs can brainstorm test cases, but they cannot send real HTTP requests or strictly verify live JSON responses on their own.
 
-**ShadowAPI solves this by separating AI synthesis from deterministic execution:**
-1. **AI Test Matrix Synthesis (Gemini):** Automatically generates positive, negative, boundary, and edge-case test payloads alongside expected JSON Schemas.
-2. **SSRF Guard (`dns.lookup` + CIDR Filtering):** Resolves target hostnames before execution and blocks loopback (`127.0.0.0/8`), private networks (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`), and cloud metadata endpoints (`169.254.169.254`).
-3. **Deterministic Contract Validation (`Ajv v8`):** Strictly validates live response bodies against generated JSON schemas (data types, required fields, nested structures) to catch silent schema regressions.
-4. **AI Root-Cause Diagnostics:** Analyzes failed test payloads, HTTP status mismatches, and schema diffs to produce actionable root-cause summaries, severity ratings, and suggested fixes.
-5. **Cloud Persistence & Resilience Scoring (`MongoDB Atlas`):** Stores saved endpoints, synthesized test matrices, execution history, and calculated Resilience Scores across sessions.
-
+**ShadowAPI combines AI speed with real, reliable testing:**
+1. **1-Click Test Generation:** Gemini AI automatically creates positive, negative, boundary, and edge-case tests from a single endpoint description.
+2. **Strict Response Checking (Ajv v8):** Verifies that every live response matches the exact expected JSON structure and data types—not just the status code.
+3. **Built-in Security (SSRF Guard):** Automatically blocks private/local IP addresses (`127.0.0.1`, internal networks) so arbitrary URLs cannot access internal server resources.
+4. **Instant Failure Explanations:** When a test fails, AI explains the exact root cause and how to fix it.
+5. **Saved History (MongoDB Atlas):** Keeps all your endpoints, test suites, and Resilience Scores saved in the cloud.
 ---
 
 ## Tech Stack
