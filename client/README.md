@@ -12,7 +12,7 @@ Testing APIs manually is slow, and relying only on AI chat has limits:
 * **AI chats don't execute live tests:** LLMs can brainstorm test cases, but they cannot send real HTTP requests or strictly verify live JSON responses on their own.
 
 **ShadowAPI combines AI speed with real, reliable testing:**
-1. **1-Click Test Generation:** Gemini AI automatically creates positive, negative, boundary, and edge-case tests from a single endpoint description.
+1. **Click Test Generation:** Gemini AI automatically creates positive, negative, boundary, and edge-case tests from a single endpoint description.
 2. **Strict Response Checking (Ajv v8):** Verifies that every live response matches the exact expected JSON structure and data types—not just the status code.
 3. **Built-in Security (SSRF Guard):** Automatically blocks private/local IP addresses (`127.0.0.1`, internal networks) so arbitrary URLs cannot access internal server resources.
 4. **Instant Failure Explanations:** When a test fails, AI explains the exact root cause and how to fix it.
