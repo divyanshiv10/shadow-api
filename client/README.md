@@ -1,4 +1,4 @@
-# ShadowAPI — Autonomous AI API Contract Testing & Diagnostics Engine
+# ShadowAPI — Autonomous AI API Testing Engine
 
 **ShadowAPI** is a full-stack hybrid API testing platform that bridges the gap between probabilistic LLM test generation and deterministic contract verification. Given an HTTP endpoint specification, it synthesizes positive, negative, boundary, and edge-case test suites using **Google Gemini AI**, executes live requests behind a hardened **SSRF Guard**, enforces strict JSON schema validation via **Ajv v8**, persists suites and resilience scores in **MongoDB Atlas**, and generates AI root-cause diagnostics for failures.
 
